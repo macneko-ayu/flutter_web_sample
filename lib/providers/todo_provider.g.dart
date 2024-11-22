@@ -20,7 +20,7 @@ final todoListProvider = AsyncNotifierProvider<TodoList, List<Todo>>.internal(
 );
 
 typedef _$TodoList = AsyncNotifier<List<Todo>>;
-String _$filteredTodosHash() => r'2fda975841af973a4e7bbc75f8c0cbfa228d4bab';
+String _$filteredTodosHash() => r'b3b007356e3dad87678691ac8259049afc32fb82';
 
 /// See also [FilteredTodos].
 @ProviderFor(FilteredTodos)
