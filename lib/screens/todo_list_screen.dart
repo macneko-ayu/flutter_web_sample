@@ -4,7 +4,11 @@ import 'package:flutter_web_sample/models/todo.dart';
 import 'package:flutter_web_sample/models/todo_filter.dart';
 import 'package:flutter_web_sample/widgets/todo_list.dart';
 import 'package:flutter_web_sample/widgets/todo_filter_sidebar.dart';
+import 'package:flutter_web_sample/widgets/todo_detail_panel.dart';
 import 'package:flutter_web_sample/widgets/responsive_layout.dart';
+import 'package:flutter_web_sample/screens/todo_form_screen.dart';
+import 'package:flutter_web_sample/widgets/search_bar.dart';
+import 'package:flutter_web_sample/providers/theme_provider.dart';
 
 class TodoListScreen extends ConsumerWidget {
   const TodoListScreen({super.key});
@@ -14,17 +18,18 @@ class TodoListScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('TODOリスト'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              // TODO: 検索機能の実装
-            },
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(56),
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TodoSearchBar(),
           ),
+        ),
+        actions: [
           IconButton(
             icon: const Icon(Icons.brightness_6),
             onPressed: () {
-              // TODO: テーマ切り替え機能の実装
+              ref.read(themeModeNotifierProvider.notifier).toggleThemeMode();
             },
           ),
         ],
@@ -36,7 +41,11 @@ class TodoListScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO: TODO作成画面への遷移
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const TodoFormScreen(),
+            ),
+          );
         },
         child: const Icon(Icons.add),
       ),
