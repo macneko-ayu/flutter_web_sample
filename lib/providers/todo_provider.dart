@@ -16,7 +16,7 @@ class TodoList extends _$TodoList {
   Future<void> addTodo(Todo todo) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final currentTodos = [...(state.value ?? []), todo];
+      final currentTodos = <Todo>[...(state.value ?? []), todo];
       await ref.read(todoRepositoryProvider).saveTodos(currentTodos);
       return currentTodos;
     });
